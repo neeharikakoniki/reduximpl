@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "677614089353",
+    "project_id": "myreactnativeap",
+    "storage_bucket": "myreactnativeap.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677614089353:android:a86cb318daaf8184f70258",
+        "android_client_info": {
+          "package_name": "com.reduximp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVeQ0yzHtkJbL3zZFFv9lOi0iRUvV4k_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
