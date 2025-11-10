@@ -1,81 +1,52 @@
-import { StatusBar, StyleSheet, Text, useColorScheme, View, TouchableOpacity, TextInput } from 'react-native';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import { RootState, store } from './src/redux/store/mystore';
-import { decrement, increment, incrementByAmount, reset } from './src/redux/slices/counterSlice';
-import { useState } from 'react';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 
+import CounterScreen from './src/screens/CounterScreen';
+import ProductListScreen from './src/screens/ProductListScreen';
+import ProductSagaScreen from './src/screens/ProductSagaScreen';
+import ProductRTKQueryScreen from './src/screens/ProductRTKQueryScreen';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar, StyleSheet } from 'react-native';
+import CartScreen from './src/screens/CartScreen';
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <AppContent />
-      </Provider>
-    </SafeAreaProvider>
+    <Provider store={store}>
+
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+          <StatusBar
+            barStyle="dark-content"
+            backgroundColor="#fff"
+            translucent={false}
+          />
+
+          {/* ----- Phase 1 (Redux Basics) ----- */}
+          {/* <CounterScreen /> */}
+
+          {/* ----- Phase 2 (Redux Thunk) ----- */}
+          {/* <ProductListScreen /> */}
+
+          {/* ----- Phase 3 (Redux Saga) ----- */}
+          <ProductSagaScreen />
+
+          {/* ----- Phase 4 (RTK Query) ----- */}
+          {/* <ProductRTKQueryScreen /> */}
+
+          {/* ----- Phase 5 (Optimization) ----- */}
+          {/* <CartScreen /> */}
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </Provider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-  const [ amount, setAmount] = useState(0);
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.container1}>Count: {count}</Text>
-
-      <TouchableOpacity style={styles.button} onPress={() => dispatch(increment())}>
-        <Text style={styles.buttonText}> + </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => dispatch(decrement())}>
-        <Text style={styles.buttonText}> - </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => dispatch(reset())}>
-        <Text style={styles.buttonText}> Reset </Text>
-      </TouchableOpacity>
-
-     <TextInput
-     placeholder='enter a number'
-     keyboardType='numeric'
-     value={amount}
-     onChangeText={setAmount}
-     />
-
-      <TouchableOpacity style={styles.button} onPress={() =>dispatch(incrementByAmount(Number(amount)))}>
-        <Text style={styles.buttonText}> Inc by amt</Text>
-
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  container1: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    marginVertical: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-});
+};
 
 export default App;
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
